@@ -27,4 +27,47 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <build>
+    <plugins>
+    <!-- maven-resources-plugin for copying static resources (HTML, CSS, images) -->
+     <plugin>
+     <groupId>org.apache.maven.plugins</groupId>
+     <artifactId>maven-resources-plugin</artifactId>
+     <version>3.2.0</version>
+     <executions>
+     <execution>
+     <phase>process-resources</phase>
+     <goals>
+     <goal>copy-resources</goal>
+     </goals>
+         <configuration>
+              <outputDirectory>${project.build.directory}/docs</outputDirectory>
+             <resources>
+              <resource>
+              <directory>src/main/resources</directory>
+              <includes>
+              <include>**/*</include>
+              </includes>
+              </resource>
+              </resources>
+              </configuration>
+          </execution>
+          </executions>
+          </plugin>
+
+         <!-- maven-jar-plugin for packaging the project into a JAR -->
+         <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-jar-plugin</artifactId>
+         <version>3.2.0</version>
+         <configuration>
+         <archive>
+         <manifestEntries>
+         <Main-Class>org.example.MainClass</Main-Class> <!-- Replace with your main class path-->
+         </manifestEntries>
+         </archive>
+         </configuration>
+         </plugin>
+         </plugins>
+    </build>
 </project>
