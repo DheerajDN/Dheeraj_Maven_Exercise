@@ -1,0 +1,24 @@
+---
+- name: Deploy Maven Artifact
+  hosts: localhost
+  become: yes
+  vars:
+    dest_dir: /opt/myapp  # Target folder for the JAR
+
+  tasks:
+    - name: Ensure deployment directory exists
+      file:
+        path: "{{ dest_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Copy JAR file to deployment directory
+      copy:
+        src: "{{ artifact_path }}/{{ jar_name }}"
+        dest: "{{ dest_dir }}/{{ jar_name }}"
+        mode: '0755'
+
+    - name: Simulate application restart
+      shell: |
+        echo "Restarting app..."
+        # Here you can replace with your actual java -jar or stop/start commands
